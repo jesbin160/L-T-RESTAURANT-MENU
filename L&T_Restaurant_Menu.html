@@ -252,24 +252,5 @@
   <footer>
     <div>© Global Bites — sample menu. Images from Unsplash. Prices are illustrative.</div>
   </footer>
-
-  <script>
-    function scrollToCuisine(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({behavior:'smooth',block:'start'});
-    }
-
-    function filterCuisine(type){
-      const sections = document.querySelectorAll('section.cuisine');
-      sections.forEach(s=>{
-        if(type==='all') s.style.display='block';
-        else{
-          // simple demo: keep all (can be expanded)
-          s.style.display='block';
-        }
-      });
-    }
-  </script>
 </body>
 </html>
