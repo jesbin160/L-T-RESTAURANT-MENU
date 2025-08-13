@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Global Bites — Restaurant Menu</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;line-height:1.4;color:#222;background:#fafafa}
+
+    header{background:linear-gradient(90deg,#ff9a9e,#fad0c4);padding:2rem 1rem;text-align:center}
+    header h1{font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0.6px}
+    header p{margin-top:.4rem;color:#3b3b3b;opacity:0.9}
+
+    nav{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding:.75rem 1rem}
+    .tag{background:#fff;border-radius:999px;padding:.45rem .8rem;font-size:.9rem;border:1px solid rgba(0,0,0,.06);cursor:pointer}
+    .tag:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+
+    main{max-width:1100px;margin:2rem auto;padding:0 1rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+
+    .card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,.05);box-shadow:0 6px 12px rgba(16,24,40,.03);transition:transform .18s}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:160px;object-fit:cover}
+    .card-content{padding:1rem}
+    .card h3{font-size:1.05rem;margin-bottom:.25rem}
+    .price{color:#0b6b5b;font-weight:700;float:right}
+    .desc{font-size:.92rem;color:#555;margin-top:.35rem}
+    .badge{display:inline-block;padding:.2rem .45rem;font-size:.75rem;border-radius:999px;background:#f3f4f6;margin-right:.35rem}
+
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:1rem;align-items:center;max-width:1100px;margin:1.5rem auto;padding:0 1rem}
+    .hero-card{background:#fff;padding:1rem;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,.04)}
+
+    .filters{display:flex;gap:.5rem;flex-wrap:wrap}
+
+    section.cuisine{margin:1.75rem 0}
+    section.cuisine header{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+    section.cuisine header h2{font-size:1.2rem}
+
+    footer{text-align:center;padding:1.5rem;color:#666;font-size:.95rem}
+
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .price{float:none}
+      header p{font-size:.95rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Global Bites</h1>
+    <p>Explore a curated menu of world cuisines — pick a category or scroll to discover.</p>
+  </header>
+
+  <nav aria-label="Cuisine quick links">
+    <button class="tag" onclick="scrollToCuisine('italian')">Italian</button>
+    <button class="tag" onclick="scrollToCuisine('indian')">Indian</button>
+    <button class="tag" onclick="scrollToCuisine('chinese')">Chinese</button>
+    <button class="tag" onclick="scrollToCuisine('japanese')">Japanese</button>
+    <button class="tag" onclick="scrollToCuisine('mexican')">Mexican</button>
+    <button class="tag" onclick="scrollToCuisine('french')">French</button>
+    <button class="tag" onclick="scrollToCuisine('middleeast')">Middle Eastern</button>
+    <button class="tag" onclick="scrollToCuisine('american')">American</button>
+    <button class="tag" onclick="scrollToCuisine('vegan')">Vegan & Desserts</button>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-card">
+      <h2 style="margin-bottom:.5rem">Chef's Picks</h2>
+      <p style="color:#555;margin-bottom:1rem">Freshly photographed, high-res images bring the dishes to life.</p>
+      <div class="filters">
+        <button class="tag" onclick="filterCuisine('all')">All</button>
+        <button class="tag" onclick="filterCuisine('veg')">Veg</button>
+        <button class="tag" onclick="filterCuisine('nonveg')">Non-Veg</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3 style="margin-bottom:.5rem">Open Hours</h3>
+      <div>Mon–Sun: 11:00 AM — 11:00 PM</div>
+      <h3 style="margin-top:1rem;margin-bottom:.5rem">Contact</h3>
+      <div>📞 +91 98765 432111</div>
+    </div>
+  </div>
+
+  <main>
+    <section id="italian" class="cuisine" data-cuisine="all">
+      <header><h2>Italian</h2><span class="badge">Pasta · Pizza · Antipasti</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://cookingitalians.com/wp-content/uploads/2024/11/Margherita-Pizza.jpg" alt="Margherita Pizza">
+          <div class="card-content"><h3>Margherita Pizza <span class="price">₹499</span></h3><div class="desc">San Marzano tomatoes, fresh mozzarella, basil, olive oil.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.sipandfeast.com/wp-content/uploads/2022/09/spaghetti-carbonara-recipe-snippet.jpg" alt="Spaghetti Carbonara">
+          <div class="card-content"><h3>Spaghetti Carbonara <span class="price">₹449</span></h3><div class="desc">Pancetta, egg yolk, Pecorino Romano, black pepper.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.simplehealthykitchen.com/wp-content/uploads/2014/08/tomato-crostini-featured.jpg" alt="Bruschetta">
+          <div class="card-content"><h3>Bruschetta <span class="price">₹249</span></h3><div class="desc">Toasted bread, tomato, garlic, basil, balsamic drizzle.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="indian" class="cuisine" data-cuisine="all">
+      <header><h2>Indian</h2><span class="badge">North · South · Street</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://vismaifood.com/storage/app/uploads/public/585/6f6/c8d/thumb__700_0_0_0_auto.jpg" alt="Butter Chicken">
+          <div class="card-content"><h3>Butter Chicken <span class="price">₹199</span></h3><div class="desc">Creamy tomato gravy, tandoori-spiced chicken, kasuri methi.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://b.zmtcdn.com/data/dish_photos/560/5b335a4bbd89b66cac97da49c70a8560.jpeg" alt="Masala Dosa">
+          <div class="card-content"><h3>Masala Dosa <span class="price">₹99</span></h3><div class="desc">Crispy rice crepe with spiced potato filling, coconut chutney.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://imgmediagumlet.lbb.in/media/2020/03/5e665369dbd2496a507aadac_1583764329821.jpg" alt="Chole Bhature">
+          <div class="card-content"><h3>Chole Bhature <span class="price">₹149</span></h3><div class="desc">Spiced chickpeas with fried bread — a Punjabi classic.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="chinese" class="cuisine" data-cuisine="all">
+      <header><h2>Chinese</h2><span class="badge">Szechuan · Cantonese · Hakka</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.seriouseats.com/thmb/AaMf6tliWc3jh0R-9KLiJG5fzZo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_optaboutcomcoeusresourcescontent_migrationserious_eatsseriouseats.com201407_2021-02-12-Take-Out-Kung-Pao-Chicken-MHOM-11-c46f6c06713c45c5a287ddbf08779d04.jpg" alt="Kung Pao Chicken">
+          <div class="card-content"><h3>Kung Pao Chicken <span class="price">₹369</span></h3><div class="desc">Stir-fried chicken, peanuts, Szechuan pepper, chilli.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://vegecravings.com/wp-content/uploads/2017/03/veg-hakka-noodles-recipe-with-step-by-step-instructions.jpg" alt="Veg Hakka Noodles">
+          <div class="card-content"><h3>Veg Hakka Noodles <span class="price">₹249</span></h3><div class="desc">Wok-tossed noodles with mixed vegetables and soy aromatics.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://media.istockphoto.com/id/668526016/photo/dim-sum.jpg?s=612x612&w=0&k=20&c=YyJf0GH52VbTUi-8CF_SiBhWrZAiD4_-pPnHBByWqSE=" alt="Dim Sum Platter">
+          <div class="card-content"><h3>Dim Sum Platter <span class="price">₹549</span></h3><div class="desc">Steamed dumplings variety — pork, prawn & veg.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="japanese" class="cuisine" data-cuisine="all">
+      <header><h2>Japanese</h2><span class="badge">Sushi · Ramen · Izakaya</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.sushiya.in/cdn/shop/files/IMG_6690.jpg?v=1749809369&width=1946" alt="Salmon Nigiri">
+          <div class="card-content"><h3>Salmon Nigiri (2 pcs) <span class="price">₹299</span></h3><div class="desc">Fresh salmon over seasoned sushi rice.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.craftycookbook.com/wp-content/uploads/2023/04/tonkotsu.jpg" alt="Tonkotsu Ramen">
+          <div class="card-content"><h3>Tonkotsu Ramen <span class="price">₹459</span></h3><div class="desc">Rich pork-bone broth, chashu, soft egg, spring onions.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://sushigallerykerikeri.com/cdn/shop/products/Gyoza-2_13836_2f80f8e2-8e83-4211-876c-05a57fffcb87_1600x.jpg?v=1588476941" alt="Gyoza">
+          <div class="card-content"><h3>Gyoza (6 pcs) <span class="price">₹199</span></h3><div class="desc">Pan-fried dumplings with soy vinegar dipping sauce.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="mexican" class="cuisine" data-cuisine="all">
+      <header><h2>Mexican</h2><span class="badge">Tacos · Burritos · Salsas</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://amindfullmom.com/wp-content/uploads/2019/08/15-minute-Buffalo-Chicken-tacos.jpg" alt="Chicken Tacos">
+          <div class="card-content"><h3>Chicken Tacos (3 pcs) <span class="price">₹329</span></h3><div class="desc">Corn tortillas, achiote chicken, pico de gallo, lime.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.thespruceeats.com/thmb/z0juH9EEhTcYVxEzbbEtYn-T4yk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/basic-rice-and-bean-vegetarian-burrito-3377050-hero-02-925ce8bd71764196b4f9b289716c2fe2.jpg" alt="Vegetarian Burrito">
+          <div class="card-content"><h3>Vegetarian Burrito <span class="price">₹319</span></h3><div class="desc">Rice, beans, grilled veg, cheese, chipotle sauce.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://s3.us-east-2.amazonaws.com/pfimg1/011/1d/f7/1df757b2d7a2a89d6d164f1c6d0df4a6_1280m.jpg" alt="Nachos Grande">
+          <div class="card-content"><h3>Nachos Grande <span class="price">₹349</span></h3><div class="desc">Crispy chips, cheese, jalapeños, salsa, sour cream.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="french" class="cuisine" data-cuisine="all">
+      <header><h2>French</h2><span class="badge">Bistro · Pastries</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.crowdedkitchen.com/wp-content/uploads/2021/02/vegan-coq-au-vin-19.jpg" alt="Coq au Vin">
+          <div class="card-content"><h3>Coq au Vin <span class="price">₹599</span></h3><div class="desc">Chicken braised with wine, mushrooms and pearl onions.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe-500x500.jpg" alt="Ratatouille">
+          <div class="card-content"><h3>Ratatouille <span class="price">₹349</span></h3><div class="desc">Slow-cooked Provencal vegetable stew.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.splenda.com/wp-content/themes/bistrotheme/assets/recipe-images/coconut-creme-brulee.jpg" alt="Crème Brûlée">
+          <div class="card-content"><h3>Crème Brûlée <span class="price">₹249</span></h3><div class="desc">Silky custard with caramelised sugar crust.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="middleeast" class="cuisine" data-cuisine="all">
+      <header><h2>Middle Eastern</h2><span class="badge">Shawarma · Mezze</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.thechunkychef.com/wp-content/uploads/2021/03/Chicken-Shawarma-recipe-card.jpg" alt="Chicken Shawarma Wrap">
+          <div class="card-content"><h3>Chicken Shawarma Wrap <span class="price">₹299</span></h3><div class="desc">Marinated chicken, garlic sauce, pickles, flatbread.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy64Fjde2fSxLZFLf0dd1dW4Y5lYonBf_g9w&s" alt="Hummus & Pita">
+          <div class="card-content"><h3>Hummus & Pita <span class="price">₹199</span></h3><div class="desc">Creamy chickpea dip with extra virgin olive oil.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://thebaklavabox.com/cdn/shop/files/pistachio-square-baklava-428436.jpg?v=1745425487" alt="Baklava">
+          <div class="card-content"><h3>Baklava <span class="price">₹199</span></h3><div class="desc">Layered filo with nuts and honey syrup.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="american" class="cuisine" data-cuisine="all">
+      <header><h2>American</h2><span class="badge">Burgers · BBQ</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.modernhoney.com/wp-content/uploads/2022/05/Double-Double-Cheeseburger-with-Fries-Recipe-500x500.jpg" alt="Classic Cheeseburger">
+          <div class="card-content"><h3>Classic Cheeseburger <span class="price">₹349</span></h3><div class="desc">Beef patty, cheddar, lettuce, tomato, house sauce.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.marthastewart.com/thmb/GL2chyMKQYGrNCVelNPJoh0J1Ck=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MS-318389-oven-roasted-ribs-with-barbecue-sauce-hero-3x2-26714-f4b156a93dd44990b38fa7c6e6ef8c78.jpg" alt="BBQ Ribs">
+          <div class="card-content"><h3>BBQ Ribs <span class="price">₹699</span></h3><div class="desc">Slow-cooked ribs with smoky barbecue glaze.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://www.onceuponachef.com/images/2010/08/Homemade-Caesar-Salad-Dressing-1200x1401.jpg" alt="Caesar Salad">
+          <div class="card-content"><h3>Caesar Salad <span class="price">₹269</span></h3><div class="desc">Romaine, parmesan, croutons, creamy caesar dressing.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="vegan" class="cuisine" data-cuisine="all">
+      <header><h2>Vegan & Desserts</h2><span class="badge">Plant-based · Sweets</span></header>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.crazyvegankitchen.com/wp-content/uploads/2023/11/buddha-bowl-recipe.jpg" alt="Vegan Buddha Bowl">
+          <div class="card-content"><h3>Vegan Buddha Bowl <span class="price">₹319</span></h3><div class="desc">Quinoa, roasted veg, chickpeas, tahini dressing.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://images.getrecipekit.com/20250325120225-how-20to-20make-20chocolate-20molten-20lava-20cake-20in-20the-20microwave.png?width=650&quality=90&" alt="Chocolate Lava Cake">
+          <div class="card-content"><h3>Chocolate Lava Cake <span class="price">₹259</span></h3><div class="desc">Warm molten chocolate with vanilla ice cream.</div></div>
+        </article>
+        <article class="card">
+          <img src="https://frostingandfettuccine.com/wp-content/uploads/2022/12/Caramel-Iced-Coffee-6.jpg" alt="Cold Brew Coffee">
+          <div class="card-content"><h3>Cold Brew Coffee <span class="price">₹149</span></h3><div class="desc">Slow-steeped cold brew served over ice.</div></div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>© Global Bites — sample menu. Images from Unsplash. Prices are illustrative.</div>
+  </footer>
+
+  <script>
+    function scrollToCuisine(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function filterCuisine(type){
+      const sections = document.querySelectorAll('section.cuisine');
+      sections.forEach(s=>{
+        if(type==='all') s.style.display='block';
+        else{
+          // simple demo: keep all (can be expanded)
+          s.style.display='block';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
